@@ -8,10 +8,6 @@ const Profile = (props) => {
         </div>
         <div className={other_items.info}>
             <img src='https://rlab.me/wp-content/uploads/2017/09/sozdat-avatar-dlya-youtube-sharg.png' />
-            <span>Имя: </span>
-            <span>Имя: </span>
-            <span>Имя: </span>
-            <span>Имя: </span>
         </div>
         <My_posts />
     </div>
