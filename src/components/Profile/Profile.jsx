@@ -1,15 +1,16 @@
 import My_posts from './My_Posts/My_posts'
 import other_items from './Profile.module.css'
+import ProfileInfo from './ProfileInfo/ProfileInfo'
+import { postData } from '../../index'
+
 
 const Profile = (props) => {
+
+    
+
     return <div>
-        <div>
-            <img width='1270' height='450' src='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' />
-        </div>
-        <div className={other_items.info}>
-            <img src='https://rlab.me/wp-content/uploads/2017/09/sozdat-avatar-dlya-youtube-sharg.png' />
-        </div>
-        <My_posts />
+        <ProfileInfo  content_image='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg' ava_image='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR36DPlGB9gHZ2cGWpOVwu9vfjH3ibtOkrzPg&usqp=CAU'/>
+        <My_posts postData={postData}/>
     </div>
 }
 

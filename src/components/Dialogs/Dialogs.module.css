@@ -3,18 +3,23 @@
     grid-template-columns: 2fr 10fr;
 }
 
-.dialogsItems{
+.dialogsItems {
     padding: 10px;
+    display: inline-block;
+    
 }
 
-.dialogsItems .active{
-    color: gold;
+.dialogsItems a{
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+}
+
+.dialogsItems a:hover{
+    color: coral;
 }
 
 .messages{
     padding: 10px;
-}
-
-.message{
-
+    color: white;
 }

@@ -1,0 +1,10 @@
+.content_image{
+    width: 1280px;
+    height:500px;
+}
+.ava_image{
+    width: 120px;
+    height: 120px;
+    padding: 5px;
+    margin-left: 15px;
+}
