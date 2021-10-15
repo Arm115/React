@@ -1,12 +1,10 @@
 import other_items from './My_posts.module.css'
 import Post from './Post/Post'
-import postData from './../../../index'
 
 const My_posts = (props) => {
 
-
     
-    let postElements = props.postData.map(post => <Post message={post.message} like={post.likesCount} />)
+    let postElements = props.state.map(post => <Post message={post.message} like={post.likesCount} />)
 
 
     return <div className={other_items.PostsBlock}>

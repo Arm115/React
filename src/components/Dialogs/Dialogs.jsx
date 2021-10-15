@@ -1,8 +1,6 @@
 import modules from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem'
 import Message from './Message/Message'
-// import { dialogsData, messagesData } from './../../index'
-import {dialogsData,messagesData} from './../../index'
 
 
 
@@ -13,8 +11,8 @@ const Dialogs = (props) => {
 
 
 
-    let dialogsElements = props.dialogsData.map(dialog => <DialogItem id={dialog.id} name={dialog.name} />)
-    let messagesElements = props.messagesData.map(message => <Message msg={message.message} />)
+    let dialogsElements = props.state.dialogsData.map(dialog => <DialogItem id={dialog.id} name={dialog.name} />)
+    let messagesElements = props.state.messagesData.map(message => <Message msg={message.message} />)
 
 
     return (
