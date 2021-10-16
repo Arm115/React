@@ -1,28 +1,35 @@
 import { NavLink } from 'react-router-dom'
 import classes from './Navbar.module.css'
+import NavbarLinks from './NavbarLinks/NavbarLinks'
+import FriendsList from './FriendsList/FriendList'
 
 
 
+const Navbar = (props) => {
+
+    let FriendsElements = props.state.friends.map(friend => <FriendsList img={friend.img} id={friend.id} name={friend.name} />)
 
 
-const Navbar = () => {
-    return <nav className={classes.nav}>
-        <div className={classes.item}>
-            <NavLink to='/profile' activeClassName={classes.active}>Profile</NavLink>
-        </div>
-        <div className={`${classes.item} ${classes.active}`}>
-            <NavLink to='/dialogs' activeClassName={classes.active}>Messages</NavLink>
-        </div>
-        <div className={classes.item}>
-            <NavLink to='/news' activeClassName={classes.active}>News</NavLink>
-        </div>
-        <div className={classes.item}>
-            <NavLink to='/music' activeClassName={classes.active}>Music</NavLink>
-        </div>
-        <div className={classes.item}>
-            <NavLink to='/settings' activeClassName={classes.active}>Settings</NavLink>
-        </div>
-    </nav>
+    return (
+        <div className={classes.nav}>
+            <nav className={classes.nav}>
+                <NavbarLinks link='profile' message='Profile' />
+                <NavbarLinks link='dialogs' message='Messages' />
+                <NavbarLinks link='news' message='News' />
+                <NavbarLinks link='music' message='Music' />
+                <NavbarLinks link='settings' message='Settings' />
+            </nav>
+            <div className={classes.friendsList}>
+                <h1>
+                    Friends
+                </h1>
+                <div className={classes.friendsLists}>
+                    {FriendsElements}
+                </div>
+
+
+            </div>
+        </div>)
 }
 
 export default Navbar

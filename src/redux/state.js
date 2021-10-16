@@ -10,9 +10,9 @@ let state = {
     },
     dialogs: {
         dialogsData: [
-            { id: 1, name: 'Vlad' },
-            { id: 2, name: 'Dimych' },
-            { id: 3, name: 'Elena' }
+            { id: 1, name: 'Vlad', avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR36DPlGB9gHZ2cGWpOVwu9vfjH3ibtOkrzPg&usqp=CAU' },
+            { id: 2, name: 'Dimych', avatar: 'https://www.meme-arsenal.com/memes/36b78c8b7cd957e082f53148b74787ea.jpg' },
+            { id: 3, name: 'Elena', avatar: 'https://sunmag.me/wp-content/uploads/2019/11/sunmag-001-small-avatar.png' }
         ],
         messagesData: [
             { id: 1, message: 'Hi how are you' },
@@ -20,6 +20,13 @@ let state = {
             { id: 3, message: 'Good luck' },
         ]
     },
+    navbar: {
+        friends: [
+            { id: 1, name: 'Vlad', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR36DPlGB9gHZ2cGWpOVwu9vfjH3ibtOkrzPg&usqp=CAU' },
+            { id: 2, name: 'Dimych', img: 'https://www.meme-arsenal.com/memes/36b78c8b7cd957e082f53148b74787ea.jpg' },
+            { id: 3, name: 'Elena', img: 'https://sunmag.me/wp-content/uploads/2019/11/sunmag-001-small-avatar.png' }
+        ],
+    },
 }
 
-export default state
+export default state;

@@ -8,7 +8,6 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
-import { postData, messagesData, dialogsData } from './index';
 
 // import testubg from './../public/testubg'
 
@@ -19,7 +18,9 @@ const App = (props) => {
     <BrowserRouter>
       <div className='app-wrapper'>
         <Header />
-        <Navbar />
+        
+        <Route path='' render={() => <Navbar state={props.state.navbar}/>}/>
+        
         <div className='app-wrapper-content'>
           <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogs}/>} /> {/* exact */}
           <Route path='/profile' render={() => <Profile state={props.state.profile}/>} />
