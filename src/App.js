@@ -9,6 +9,7 @@ import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 
+
 // import testubg from './../public/testubg'
 
 
@@ -22,8 +23,8 @@ const App = (props) => {
         <Route path='' render={() => <Navbar state={props.state.navbar}/>}/>
         
         <div className='app-wrapper-content'>
-          <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogs}/>} /> {/* exact */}
-          <Route path='/profile' render={() => <Profile state={props.state.profile}/>} />
+          <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogs}/>}/> {/* exact */}
+          <Route path='/profile' render={() => <Profile state={props.state.profile } addPost={props.addPost}/>} />
           <Route path='/news' render={() => <News />}/>
           <Route path='/music' render={() => <Music />}/>
           <Route path='/settings' render={() => <Settings />}/>
