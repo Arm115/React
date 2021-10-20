@@ -8,7 +8,9 @@ let state = {
             { id: 3, message: '', likesCount: 0 },
             { id: 4, message: 'This is test of mapping', likesCount: 5 },
         ],
+        newPostValue: ''
     },
+    
     dialogs: {
         dialogsData: [
             { id: 1, name: 'Vlad', avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR36DPlGB9gHZ2cGWpOVwu9vfjH3ibtOkrzPg&usqp=CAU' },
@@ -31,14 +33,21 @@ let state = {
 }
 
 
-export let addPost = (postMessage) => {
+export let addPost = () => {
     let newPost = {
         id : 5,
-        message: postMessage,
+        message: state.profile.newPostValue,
         likesCount: 0
     }
     state.profile.postsData.push(newPost)
+    state.profile.newPostValue = ''
     rerenderEntireTree(state)
+}
+
+export let updateNewPostChange = (newText) => {
+    state.profile.newPostValue = newText
+    rerenderEntireTree(state)
+    
 }
 
 // export let addMessage = (dialogMessage) => {
