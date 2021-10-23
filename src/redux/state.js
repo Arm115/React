@@ -1,3 +1,5 @@
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_CHANGE = 'UPDATE-NEW-POST-CHANGE'
 
 let store = {
     _state: {
@@ -31,38 +33,41 @@ let store = {
             ],
         },
     },
-    getState(){
-        return this._state
-    },
     _callSubscriber() {
         console.log('Hi')
     },
-    addPost() {
-        let newPost = {
-            id: 5,
-            message: this._state.profile.newPostValue,
-            likesCount: 0
-        }
-        this._state.profile.postsData.push(newPost)
-        this._state.profile.newPostValue = ''
-        this._callSubscriber(this._state)
-    },
-    updateNewPostChange(newText) {
-        this._state.profile.newPostValue = newText
-        this._callSubscriber(this._state)
-    },
+
     subcribe(observer) {
         this._callSubscriber = observer
     },
-    addMessage(dialogMessage) {
-        let newDialog = {
-            id: 4,
-            message: dialogMessage
+    getState() {
+        return this._state
+    },
+
+
+    dispatch(action) { // { type: 'ADD-POST' }
+        if (action.type === ADD_POST) {
+            let newPost = {
+                id: 5,
+                message: this._state.profile.newPostValue,
+                likesCount: 0
+            }
+            this._state.profile.postsData.push(newPost)
+            this._state.profile.newPostValue = ''
+            this._callSubscriber(this._state)
+
+        } else if (action.type === UPDATE_NEW_POST_CHANGE) {
+            this._state.profile.newPostValue = action.newText
+            this._callSubscriber(this._state)
+
         }
-        this._statedialogs.messagesData.push(newDialog)
-        this._callSubscriber(this._state)
-    }
+
+    },
 }
+
+export const addPostActionCreator = () => ({ type: ADD_POST })
+export const onPostChangeActionCreator = (newText) =>
+    ({ type: UPDATE_NEW_POST_CHANGE, newText: newText })
 
 
 

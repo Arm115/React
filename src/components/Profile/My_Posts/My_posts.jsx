@@ -1,6 +1,9 @@
 import other_items from './My_posts.module.css'
 import Post from './Post/Post'
 import React from 'react'
+import { addPostActionCreator, onPostChangeActionCreator } from '../../../redux/state'
+
+
 
 const My_posts = (props) => {
     
@@ -10,12 +13,12 @@ const My_posts = (props) => {
     let newPostElement = React.createRef(); 
 
     let addPost = () => {
-        props.addPost()
+        props.dispatch(addPostActionCreator())
     }
 
     let onPostChange = () => {
         let newText = newPostElement.current.value
-        props.updateNewPostChange(newText)
+        props.dispatch(onPostChangeActionCreator(newText))
     }
     
     return <div className={other_items.PostsBlock}>
