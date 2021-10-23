@@ -1,5 +1,7 @@
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_CHANGE = 'UPDATE-NEW-POST-CHANGE'
+const ADD_MESSAGE = 'ADD_MESSAGE'
+const UPDATE_NEW_MESSAGE_CHANGE = 'UPDATE_NEW_MESSAGE_CHANGE'
 
 let store = {
     _state: {
@@ -23,7 +25,8 @@ let store = {
                 { id: 1, message: 'Hi how are you' },
                 { id: 2, message: 'How you did it' },
                 { id: 3, message: 'Good luck' },
-            ]
+            ],
+            newMessageValue: ''
         },
         navbar: {
             friends: [
@@ -60,14 +63,30 @@ let store = {
             this._state.profile.newPostValue = action.newText
             this._callSubscriber(this._state)
 
+        } else if (action.type === ADD_MESSAGE) {
+            let newMessage = {
+                id:4,
+                message: this._state.dialogs.newMessageValue
+            }
+
+            this._state.dialogs.messagesData.push(newMessage)
+            this._state.dialogs.newMessageValue = ''
+            this._callSubscriber(this._state)
+        } else if(action.type === UPDATE_NEW_MESSAGE_CHANGE){
+            this._state.dialogs.newMessageValue = action.newMessageText
+            this._callSubscriber(this._state)
         }
 
     },
 }
 
+
 export const addPostActionCreator = () => ({ type: ADD_POST })
 export const onPostChangeActionCreator = (newText) =>
     ({ type: UPDATE_NEW_POST_CHANGE, newText: newText })
+export const addMessageActionCreator = () => ({ type: ADD_MESSAGE})
+export const onMessageChangeActionCreator = (newMessageText) =>
+    ({type: UPDATE_NEW_MESSAGE_CHANGE, newMessageText: newMessageText})
 
 
 

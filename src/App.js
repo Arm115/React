@@ -23,7 +23,7 @@ const App = (props) => {
         <Route path='' render={() => <Navbar state={props.state.navbar}/>}/>
         
         <div className='app-wrapper-content'>
-          <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogs}/>}/> {/* exact */}
+          <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogs} dispatch={props.dispatch}/>}/> {/* exact */}
           <Route path='/profile' render={() => <Profile state={props.state.profile } dispatch={props.dispatch}/>} />
           <Route path='/news' render={() => <News />}/>
           <Route path='/music' render={() => <Music />}/>
