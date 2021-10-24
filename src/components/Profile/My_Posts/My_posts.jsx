@@ -6,8 +6,6 @@ import { addPostActionCreator, onPostChangeActionCreator } from '../../../redux/
 
 
 const My_posts = (props) => {
-    
-    
     let postElements = props.state.map(post => <Post message={post.message} like={post.likesCount} />)
 
 
