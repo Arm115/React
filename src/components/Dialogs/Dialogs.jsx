@@ -10,20 +10,20 @@ import { addMessageActionCreator, onMessageChangeActionCreator } from '../../red
 
 
 const Dialogs = (props) => {
-    let dialogsElements = props.state.dialogs.dialogsData.map(dialog => <DialogItem id={dialog.id} name={dialog.name} avatar={dialog.avatar} />)
-    let messagesElements = props.state.dialogs.messagesData.map(message => <Message msg={message.message} />)
-
-
-
+    let dialogsElements = props.dialogsData.map(dialog => <DialogItem id={dialog.id} name={dialog.name} avatar={dialog.avatar} />)
+    let messagesElements = props.messagesData.map(message => <Message msg={message.message} />)
+    // props.state.dialogs.dialogsData.map
+    // props.state.dialogs.messagesData.map
 
     let addMessage= () => {
-        props.dispatch(addMessageActionCreator())
+        props.onAddMessage()
     }
 
-    let onMessageChange = (event) => {
+    let MessageChange = (event) => {
         let newMessageText = event.target.value
-        props.dispatch(onMessageChangeActionCreator(newMessageText))
+        props.onMessageChange(newMessageText)
     }
+
 
     return (
         <div className={modules.dialogs}>
@@ -34,7 +34,7 @@ const Dialogs = (props) => {
                 <div>
                     {messagesElements}
                 </div>
-                <div><textarea onChange={onMessageChange} value={props.state.dialogs.newMessageValue} placeholder='Enter your message'></textarea></div>
+                <div><textarea onChange={MessageChange} value={props.newMessageValue} placeholder='Enter your message'></textarea></div>
                 <div><button onClick={addMessage}>Send message</button></div>
             </div>
         </div>
