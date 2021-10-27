@@ -9,6 +9,7 @@ import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import NavbarContainer from './components/Navbar/NavbarContainer';
+import UsersContainer from './components/Users/UsersContainer';
 
 
 // import testubg from './../public/testubg'
@@ -25,6 +26,7 @@ const App = (props) => {
       <div className='app-wrapper-content'>
         <Route path='/dialogs' render={() => <DialogsContainer />} /> {/* exact */}
         <Route path='/profile' render={() => <Profile/>} />
+        <Route path='/users' render={() => <UsersContainer />} />
         <Route path='/news' render={() => <News />} />
         <Route path='/music' render={() => <Music />} />
         <Route path='/settings' render={() => <Settings />} />
