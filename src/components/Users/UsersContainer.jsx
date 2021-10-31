@@ -1,34 +1,46 @@
 import React from "react"
 import { connect } from "react-redux"
-import { followAC, setCurrentPageAC, setUsersAC, unfollowAC } from "../../redux/users-reducer"
+import { followAC, setCurrentPageAC, setUsersAC, toggleFetchingAC, unfollowAC } from "../../redux/users-reducer"
 import * as axios from "axios";
 import Users from "./Users";
+import Preloader from "../common/Preloader/Preloader";
+
 
 class UsersAPIContainer extends React.Component {
     componentDidMount() {
+        this.props.isFetchings(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.isFetchings(false)
             this.props.setUsers(response.data.items)
-            
+
         });
     }
 
+    
+
     onPageChanged = (currentPage) => {
+        this.props.isFetchings(true)
         this.props.setCurrentPage(currentPage)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.isFetchings(false)
             this.props.setUsers(response.data.items)
         });
     }
+
 
     render() {
 
-        return <Users 
-            pageSize={this.props.pageSize} 
-            totalUsersCount={this.props.totalUsersCount}
-            currentPage={this.props.currentPage}
-            onPageChanged={this.onPageChanged}
-            follow={this.props.follow}
-            unfollow={this.props.unfollow}
-            users={this.props.users}/>
+        return <Users
+                pageSize={this.props.pageSize}
+                totalUsersCount={this.props.totalUsersCount}
+                currentPage={this.props.currentPage}
+                onPageChanged={this.onPageChanged}
+                follow={this.props.follow}
+                unfollow={this.props.unfollow}
+                users={this.props.users}
+                isFetching={this.props.isFetching}
+                
+            />
 
     }
 
@@ -36,12 +48,13 @@ class UsersAPIContainer extends React.Component {
 
 
 let mapStateToProps = (state) => {
-    
+
     return {
         users: state.users.users,
         pageSize: state.users.pageSize,
         totalUsersCount: state.users.totalUsersCount,
-        currentPage: state.users.currentPage
+        currentPage: state.users.currentPage,
+        isFetching: state.users.isFetching
     }
 }
 
@@ -59,10 +72,13 @@ let mapDispatchToProps = (dispatch) => {
         },
         setCurrentPage: (currentPage) => {
             dispatch(setCurrentPageAC(currentPage))
+        },
+        isFetchings:(isFetching) => {
+            dispatch(toggleFetchingAC(isFetching))
         }
     }
 }
 
-const UsersContainer = connect(mapStateToProps,mapDispatchToProps)(UsersAPIContainer)
+const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIContainer)
 
 export default UsersContainer

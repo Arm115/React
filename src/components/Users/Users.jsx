@@ -1,6 +1,7 @@
 import modules from './Users.module.css'
 import usersPhotoDefault from './../../assets/images/usersDefaultPhoto.jpg'
 import { NavLink } from "react-router-dom";
+import preloader from './../../assets/images/Rocket.gif'
 
 let Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -40,6 +41,7 @@ let Users = (props) => {
                         </span>
                     </div>)}
             </div>
+            <div>{props.isFetching ? <img src={preloader} className={modules.preloader}/> : null}</div>
         </div>
     )
 }

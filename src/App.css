@@ -9,6 +9,7 @@
 }
 
 .app-wrapper-content{
+
   grid-area: c;
-  background-color: cornflowerblue;
+  background-color: #5BEC46;
 }
