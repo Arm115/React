@@ -1,5 +1,7 @@
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_CHANGE = 'UPDATE-NEW-POST-CHANGE'
+const SET_PROFILE_USERS = 'SET_PROFILE_USERS'
+
 
 let initialState = {
     profile: {
@@ -11,6 +13,7 @@ let initialState = {
         ],
         newPostValue: ''
     },
+    userProfile:null
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -32,6 +35,9 @@ const profileReducer = (state = initialState, action) => {
             stateCopy.profile.newPostValue = action.newText
             return stateCopy
         }
+        case SET_PROFILE_USERS:{
+            return{...state, userProfile: action.userProfile}
+        }
         default:
             return state
     }
@@ -42,5 +48,6 @@ const profileReducer = (state = initialState, action) => {
 export const addPostActionCreator = () => ({ type: ADD_POST })
 export const onPostChangeActionCreator = (newText) =>
     ({ type: UPDATE_NEW_POST_CHANGE, newText: newText })
+export const setProfileUsers = (userProfile) => ({type: SET_PROFILE_USERS, userProfile})
 
 export default profileReducer
