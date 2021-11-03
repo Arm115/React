@@ -15,7 +15,9 @@ const ProfileInfo = (props) => {
                 <img className={modules.content_image} src={props.content_image}/>
             </div>
             <div>
-                <img className={modules.ava_image} src={props.userProfile.photos.small != null ? props.userProfile.photos.small : usersPhotoDefault} />
+                <img className={modules.ava_image} src={props.userProfile.photos.large != null ? props.userProfile.photos.large : usersPhotoDefault} /><br/>
+                <p className={modules.spans}>{props.userProfile.fullName}</p>
+                <p className={modules.spans}>{props.userProfile.aboutMe != null ? props.userProfile.aboutMe : 'Я обычный пользователь этой социальной сети'}</p>
             </div>
             
         </div>

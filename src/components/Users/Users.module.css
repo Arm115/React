@@ -22,3 +22,6 @@ a:hover{
 .preloader{
     margin-left: 500px;
 }
+.pages_span a{
+    display: flex;
+}

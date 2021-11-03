@@ -1,5 +1,5 @@
 .content_image{
-    width: 1280px;
+    width: 1329px;
     height:500px;
 }
 .ava_image{
@@ -10,4 +10,7 @@
 }
 .preloader{
     margin-left: 500px;
+}
+.spans{
+    margin-left: 15px;
 }
