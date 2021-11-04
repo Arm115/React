@@ -13,7 +13,7 @@ const Navbar = (props) => {
     return (
         <div className={classes.nav}>
             <nav className={classes.nav}>
-                <NavbarLinks link='profile' message='Profile' />
+                <NavbarLinks link={'profile/' + props.id} message='Profile' />
                 <NavbarLinks link='dialogs' message='Messages' />
                 <NavbarLinks link='news' message='News' />
                 <NavbarLinks link='music' message='Music' />

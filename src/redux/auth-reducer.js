@@ -1,9 +1,8 @@
 const SET_USER_DATA = 'SET_USER_DATA'
 
-
 let initialState = {
-    id: null,
     email: null,
+    id: null,
     login: null,
     isAuth: false
 
@@ -11,8 +10,8 @@ let initialState = {
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
+        
         case SET_USER_DATA:
-            
             return {
                 
                 ...state,
@@ -29,6 +28,7 @@ const authReducer = (state = initialState, action) => {
 
 
 
-export const setUserData = (id,email,login) => ({type:SET_USER_DATA, data: {id,email,login}})
+export const setUserData = (email,id,login) => ({type:SET_USER_DATA, data: {email,id,login}})
+
 
 export default authReducer

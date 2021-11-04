@@ -18,6 +18,7 @@ let initialState = {
 
 const profileReducer = (state = initialState, action) => {
     switch(action.type){
+        
         case ADD_POST:{
             let newPost = {
                 id: 5,
@@ -36,6 +37,7 @@ const profileReducer = (state = initialState, action) => {
             return stateCopy
         }
         case SET_PROFILE_USERS:{
+            
             return{...state, userProfile: action.userProfile}
         }
         default:
