@@ -9,7 +9,9 @@ import Preloader from "../common/Preloader/Preloader";
 class UsersAPIContainer extends React.Component {
     componentDidMount() {
         this.props.isFetchings(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        }).then(response => {
             
             this.props.isFetchings(false)
             this.props.setUsers(response.data.items)
@@ -22,7 +24,9 @@ class UsersAPIContainer extends React.Component {
     onPageChanged = (currentPage) => {
         this.props.isFetchings(true)
         this.props.setCurrentPage(currentPage)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        }).then(response => {
             
             this.props.isFetchings(false)
             this.props.setUsers(response.data.items)
