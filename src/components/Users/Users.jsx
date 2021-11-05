@@ -14,6 +14,7 @@ let Users = (props) => {
         pages.push(i)
     }
 
+    
 
 
     return (
@@ -32,29 +33,14 @@ let Users = (props) => {
                                 {u.followed
                                     ? <button onClick={() => {
                                         
-                                        userUnfollow(u.id)
-                                            .then(response => {
-                                                debugger
-                                                if (response.data.resultCode === 0) {
-                                                    props.unfollow(u.id)
-                                                }
-
-
-                                            });
+                                        props.following(u.id)
                                     }
 
 
                                     }>Unfollow</button>
                                     : <button onClick={() => {
 
-                                        userFollow(u.id).then(response => {
-
-                                            if (response.data.resultCode === 0) {
-                                                props.follow(u.id)
-                                            }
-
-
-                                        });
+                                        props.unfollowing(u.id)
 
                                     }
 

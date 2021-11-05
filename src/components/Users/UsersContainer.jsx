@@ -4,46 +4,71 @@ import { followAC, setCurrentPageAC, setUsersAC, toggleFetchingAC, unfollowAC } 
 import * as axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import { getUsers } from "../../api/api";
+import { followAPI, usersAPI } from "../../api/api";
 
 
 class UsersAPIContainer extends React.Component {
     componentDidMount() {
         this.props.isFetchings(true)
-        getUsers(this.props.currentPage,this.props.pageSize).then(data => {
-            
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+
             this.props.isFetchings(false)
             this.props.setUsers(data.items)
 
         });
     }
 
-    
+
 
     onPageChanged = (currentPage) => {
         this.props.isFetchings(true)
         this.props.setCurrentPage(currentPage)
-        getUsers(currentPage, this.props.pageSize).then(data => {
-            
+        usersAPI.getUsers(currentPage, this.props.pageSize).then(data => {
+
             this.props.isFetchings(false)
             this.props.setUsers(data.items)
         });
+    }
+
+    following = (id) => {
+        followAPI.userFollow(id)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    this.props.follow(id)
+                }
+
+
+            });
+    }
+    unfollowing = (id) => {
+        followAPI.userUnfollow(id)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    this.props.unfollow(id)
+                }
+
+
+            });
     }
 
 
     render() {
 
         return <Users
-                pageSize={this.props.pageSize}
-                totalUsersCount={this.props.totalUsersCount}
-                currentPage={this.props.currentPage}
-                onPageChanged={this.onPageChanged}
-                follow={this.props.follow}
-                unfollow={this.props.unfollow}
-                users={this.props.users}
-                isFetching={this.props.isFetching}
-                
-            />
+            pageSize={this.props.pageSize}
+            totalUsersCount={this.props.totalUsersCount}
+            currentPage={this.props.currentPage}
+            onPageChanged={this.onPageChanged}
+            follow={this.props.follow}
+            unfollow={this.props.unfollow}
+            users={this.props.users}
+            isFetching={this.props.isFetching}
+            userUnfollow={this.props.userUnfollow}
+            userFollow={this.props.userFollow}
+            following={this.following}
+            unfollowing={this.unfollowing}
+
+        />
 
     }
 
@@ -76,7 +101,7 @@ let mapDispatchToProps = (dispatch) => {
         setCurrentPage: (currentPage) => {
             dispatch(setCurrentPageAC(currentPage))
         },
-        isFetchings:(isFetching) => {
+        isFetchings: (isFetching) => {
             dispatch(toggleFetchingAC(isFetching))
         }
     }

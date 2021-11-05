@@ -2,7 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { getProfile} from '../../api/api'
+import { getProfile, profileAPI} from '../../api/api'
 import { setProfileUsers} from '../../redux/profile-reducer'
 import Profile from './Profile'
 
@@ -16,7 +16,7 @@ class ProfileContainer extends React.Component {
         if(!id){
             id = 2
         }
-        getProfile(id)
+        profileAPI.getProfile(id)
         .then(response => {
             this.props.setProfileUsers(response.data)
             
