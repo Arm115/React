@@ -4,17 +4,16 @@ import { followAC, setCurrentPageAC, setUsersAC, toggleFetchingAC, unfollowAC } 
 import * as axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import { getUsers } from "../../api/api";
 
 
 class UsersAPIContainer extends React.Component {
     componentDidMount() {
         this.props.isFetchings(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        }).then(response => {
+        getUsers(this.props.currentPage,this.props.pageSize).then(data => {
             
             this.props.isFetchings(false)
-            this.props.setUsers(response.data.items)
+            this.props.setUsers(data.items)
 
         });
     }
@@ -24,12 +23,10 @@ class UsersAPIContainer extends React.Component {
     onPageChanged = (currentPage) => {
         this.props.isFetchings(true)
         this.props.setCurrentPage(currentPage)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        }).then(response => {
+        getUsers(currentPage, this.props.pageSize).then(data => {
             
             this.props.isFetchings(false)
-            this.props.setUsers(response.data.items)
+            this.props.setUsers(data.items)
         });
     }
 

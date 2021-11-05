@@ -2,14 +2,13 @@ import axios from "axios"
 import React from "react"
 import { connect } from "react-redux"
 import { withRouter } from "react-router"
+import { getMyProfile } from "../../api/api"
 import { getUserId } from "../../redux/navbar-reducer"
 import Navbar from "./Navbar"
 
 class NavbarContainer extends React.Component{
     componentDidMount(){
-        axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {
-            withCredentials:true
-        }).then(response => {
+        getMyProfile().then(response => {
 
             
             if(response.data.resultCode === 0){
