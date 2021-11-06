@@ -25,12 +25,11 @@ export const profileAPI = {
     }
 }
 
-export const followAPI = {
-    userUnfollow(id){
-        return instance.delete(`follow/${id}`).then(response => response.data)
+export const followAPi = {
+    userFollowing(id){
+        return instance.post(`follow/${id}`, {})
     },
-    userFollow(id){
-        return instance.post(`follow/${id}`, {}).then(response => response.data)
+    userUnfollowing(id){
+        return instance.delete(`follow/${id}`)
     }
 }
-

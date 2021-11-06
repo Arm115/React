@@ -1,10 +1,9 @@
 import React from "react"
 import { connect } from "react-redux"
-import { followAC, setCurrentPageAC, setUsersAC, toggleFetchingAC, unfollowAC } from "../../redux/users-reducer"
-import * as axios from "axios";
+import { followAC, setCurrentPageAC, setUsersAC, toggleFetchingAC, toggleFollowingInProgressAC, unfollowAC } from "../../redux/users-reducer"
 import Users from "./Users";
-import Preloader from "../common/Preloader/Preloader";
-import { followAPI, usersAPI } from "../../api/api";
+import { followAPi, usersAPI } from "../../api/api";
+
 
 
 class UsersAPIContainer extends React.Component {
@@ -12,10 +11,31 @@ class UsersAPIContainer extends React.Component {
         this.props.isFetchings(true)
         usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
 
+
             this.props.isFetchings(false)
             this.props.setUsers(data.items)
+        })
+    }
 
-        });
+
+    unfollowing = (id) => {
+        followAPi.userUnfollowing(id).then(response => {
+
+            if (response.data.resultCode === 0) {
+                this.props.unfollow(id)
+            }
+
+        })
+    }
+
+    following = (id) => {
+        followAPi.userFollowing(id).then(response => {
+            if (response.data.resultCode === 0) {
+                this.props.follow(id)
+            }
+
+        })
+
     }
 
 
@@ -30,27 +50,6 @@ class UsersAPIContainer extends React.Component {
         });
     }
 
-    following = (id) => {
-        followAPI.userFollow(id)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    this.props.follow(id)
-                }
-
-
-            });
-    }
-    unfollowing = (id) => {
-        followAPI.userUnfollow(id)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    this.props.unfollow(id)
-                }
-
-
-            });
-    }
-
 
     render() {
 
@@ -63,10 +62,10 @@ class UsersAPIContainer extends React.Component {
             unfollow={this.props.unfollow}
             users={this.props.users}
             isFetching={this.props.isFetching}
-            userUnfollow={this.props.userUnfollow}
-            userFollow={this.props.userFollow}
             following={this.following}
             unfollowing={this.unfollowing}
+            toggleFollowingInProgress={this.props.toggleFollowingInProgress}
+            followingInProgress={this.props.followingInProgress}
 
         />
 
@@ -82,18 +81,19 @@ let mapStateToProps = (state) => {
         pageSize: state.users.pageSize,
         totalUsersCount: state.users.totalUsersCount,
         currentPage: state.users.currentPage,
-        isFetching: state.users.isFetching
+        isFetching: state.users.isFetching,
+        followingInProgress: state.users.followingInProgress
     }
 }
 
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        follow: (userId) => {
-            dispatch(followAC(userId))
+        follow: (id) => {
+            dispatch(followAC(id))
         },
-        unfollow: (userId) => {
-            dispatch(unfollowAC(userId))
+        unfollow: (id) => {
+            dispatch(unfollowAC(id))
         },
         setUsers: (users) => {
             dispatch(setUsersAC(users))
@@ -103,6 +103,9 @@ let mapDispatchToProps = (dispatch) => {
         },
         isFetchings: (isFetching) => {
             dispatch(toggleFetchingAC(isFetching))
+        },
+        toggleFollowingInProgress: (followingInProgress) => {
+            dispatch(toggleFollowingInProgressAC(followingInProgress))
         }
     }
 }
