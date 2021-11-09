@@ -3,19 +3,14 @@ import React from "react"
 import { connect } from "react-redux"
 import { withRouter } from "react-router"
 import { getMyProfile, profileAPI } from "../../api/api"
-import { getUserId } from "../../redux/navbar-reducer"
+import { getMyProfileThunk, getUserId } from "../../redux/navbar-reducer"
 import Navbar from "./Navbar"
+
+
 
 class NavbarContainer extends React.Component{
     componentDidMount(){
-        profileAPI.getMyProfile().then(response => {
-
-            
-            if(response.data.resultCode === 0){
-                this.props.getUserId(response.data.data.id)
-            }
-            
-        })
+        this.props.getMyProfileThunk()
     }
 
     render(){
@@ -33,4 +28,4 @@ let mapStateToProps = (state) => ({
 
 let NavbarContainerUrl = withRouter(NavbarContainer)
 
-export default connect(mapStateToProps,{getUserId})(NavbarContainerUrl)
+export default connect(mapStateToProps,{getUserId, getMyProfileThunk})(NavbarContainerUrl)

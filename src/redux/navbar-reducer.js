@@ -1,3 +1,5 @@
+import { profileAPI } from "../api/api"
+
 const USER_ID = 'USER_ID'
 
 let initialState = {
@@ -24,7 +26,20 @@ const navbarReducer = (state = initialState,action) => {
     }
 }
 
+
 export const getUserId = (id) => ({type:USER_ID, id})
 
+export const getMyProfileThunk = () => {
+    return (dispatch) => {
+        profileAPI.getMyProfile().then(response => {
+
+            
+            if(response.data.resultCode === 0){
+                dispatch(getUserId(response.data.data.id))
+            }
+            
+        })
+    }
+}
 
 export default navbarReducer

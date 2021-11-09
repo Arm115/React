@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import { followAC, setCurrentPageAC, setUsersAC, toggleFetchingAC, toggleFollowingInProgressAC, unfollowAC } from "../../redux/users-reducer"
+import { followAC, followingThunkCreator, getCurrentPageThunkCreator, getUsersThunkCreator, setCurrentPageAC, setUsersAC, toggleFetchingAC, toggleFollowingInProgressAC, unfollowAC, unfollowingThunkCreator } from "../../redux/users-reducer"
 import Users from "./Users";
 import { followAPi, usersAPI } from "../../api/api";
 
@@ -8,46 +8,25 @@ import { followAPi, usersAPI } from "../../api/api";
 
 class UsersAPIContainer extends React.Component {
     componentDidMount() {
-        this.props.isFetchings(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-
-
-            this.props.isFetchings(false)
-            this.props.setUsers(data.items)
-        })
+        this.props.getUsersThunk()
     }
 
 
     unfollowing = (id) => {
-        followAPi.userUnfollowing(id).then(response => {
-
-            if (response.data.resultCode === 0) {
-                this.props.unfollow(id)
-            }
-
-        })
+        this.props.unfollowingThunk(id)
     }
 
-    following = (id) => {
-        followAPi.userFollowing(id).then(response => {
-            if (response.data.resultCode === 0) {
-                this.props.follow(id)
-            }
+    
 
-        })
+    following = (id) => {
+        this.props.followingThunk(id)
 
     }
 
 
 
     onPageChanged = (currentPage) => {
-        this.props.isFetchings(true)
-        this.props.setCurrentPage(currentPage)
-        usersAPI.getUsers(currentPage, this.props.pageSize).then(data => {
-
-            this.props.isFetchings(false)
-            this.props.setUsers(data.items)
-        });
+        this.props.getCurrentPage(currentPage)
     }
 
 
@@ -106,7 +85,20 @@ let mapDispatchToProps = (dispatch) => {
         },
         toggleFollowingInProgress: (followingInProgress) => {
             dispatch(toggleFollowingInProgressAC(followingInProgress))
+        },
+        getUsersThunk:(currentPage,pageSize) => {
+            dispatch(getUsersThunkCreator(currentPage,pageSize))
+        },
+        unfollowingThunk:(id) => {
+            dispatch(unfollowingThunkCreator(id))
+        },
+        followingThunk:(id) => {
+            dispatch(followingThunkCreator(id))
+        },
+        getCurrentPage:(currentPage,pageSize) => {
+            dispatch(getCurrentPageThunkCreator(currentPage,pageSize))
         }
+
     }
 }
 
