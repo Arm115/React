@@ -1,5 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
+import { compose } from "redux";
 import { withAuthRedirect } from "../../hoc/AuthRedirect";
 import { followAC, followingThunkCreator, getCurrentPageThunkCreator, getUsers, setCurrentPageAC, setUsersAC, toggleFetchingAC, toggleFollowingInProgressAC, unfollowAC, unfollowingThunkCreator } from "../../redux/users-reducer"
 import Users from "./Users";
@@ -102,8 +103,9 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-let AuthRedirectComponent = withAuthRedirect(UsersAPIContainer)
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
 
-export default UsersContainer
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(UsersAPIContainer)
