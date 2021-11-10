@@ -26,6 +26,7 @@ let mapStateToProps = (state) => ({
 
 
 
+
 let NavbarContainerUrl = withRouter(NavbarContainer)
 
 export default connect(mapStateToProps,{getUserId, getMyProfileThunk})(NavbarContainerUrl)
