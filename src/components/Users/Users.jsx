@@ -2,7 +2,7 @@ import modules from './Users.module.css'
 import usersPhotoDefault from './../../assets/images/usersDefaultPhoto.jpg'
 import { NavLink } from "react-router-dom";
 import preloader from './../../assets/images/Rocket.gif'
-import axios from 'axios';
+
 
 
 

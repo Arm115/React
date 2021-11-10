@@ -1,14 +1,13 @@
 import React from "react"
 import { connect } from "react-redux"
-import { followAC, followingThunkCreator, getCurrentPageThunkCreator, getUsersThunkCreator, setCurrentPageAC, setUsersAC, toggleFetchingAC, toggleFollowingInProgressAC, unfollowAC, unfollowingThunkCreator } from "../../redux/users-reducer"
+import { followAC, followingThunkCreator, getCurrentPageThunkCreator, getUsers, setCurrentPageAC, setUsersAC, toggleFetchingAC, toggleFollowingInProgressAC, unfollowAC, unfollowingThunkCreator } from "../../redux/users-reducer"
 import Users from "./Users";
-import { followAPi, usersAPI } from "../../api/api";
 
 
 
 class UsersAPIContainer extends React.Component {
     componentDidMount() {
-        this.props.getUsersThunk()
+        this.props.getUsers()
     }
 
 
@@ -86,8 +85,8 @@ let mapDispatchToProps = (dispatch) => {
         toggleFollowingInProgress: (followingInProgress) => {
             dispatch(toggleFollowingInProgressAC(followingInProgress))
         },
-        getUsersThunk:(currentPage,pageSize) => {
-            dispatch(getUsersThunkCreator(currentPage,pageSize))
+        getUsers:(currentPage,pageSize) => {
+            dispatch(getUsers(currentPage,pageSize))
         },
         unfollowingThunk:(id) => {
             dispatch(unfollowingThunkCreator(id))

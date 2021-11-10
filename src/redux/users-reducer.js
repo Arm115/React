@@ -71,7 +71,7 @@ export const setCurrentPageAC = (currentPage) => ({type: SET_CURRENT_PAGE, curre
 export const toggleFetchingAC = (isFetching) => ({type:TOGGLE_IS_FETCHING, isFetching})
 export const toggleFollowingInProgressAC = (isFetching,userId) => ({type:TOGGLE_IS_FOLLOWING_PROGRESS, isFetching,userId })
 
-export const getUsersThunkCreator = (currentPage,pageSize) => {
+export const getUsers = (currentPage,pageSize) => {
     return (dispatch) => {
     dispatch(toggleFetchingAC(true))
         usersAPI.getUsers(currentPage,pageSize).then(data => {
