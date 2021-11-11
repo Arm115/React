@@ -51,8 +51,8 @@ const usersReducer = (state = initialState, action) => {
             return{
                 ...state,
                 followingInProgress: [...action.isFetching] 
-                    ?[...state.followingInProgress, action.userId]
-                    :[...state.followingInProgress.filter(id => id != action.userId)]
+                    ?[...state.followingInProgress, action.userId] // берём нужного пользователя
+                    :[...state.followingInProgress.filter(id => id != action.userId)] // не берём не нужных пользователей
             }
             
 
@@ -71,7 +71,7 @@ export const setCurrentPageAC = (currentPage) => ({type: SET_CURRENT_PAGE, curre
 export const toggleFetchingAC = (isFetching) => ({type:TOGGLE_IS_FETCHING, isFetching})
 export const toggleFollowingInProgressAC = (isFetching,userId) => ({type:TOGGLE_IS_FOLLOWING_PROGRESS, isFetching,userId })
 
-export const getUsers = (currentPage,pageSize) => {
+export const getUsers = (currentPage,pageSize) => { // берём юзеров из дефолтной страницы(1) с дефолтным количеством юзеров(5)
     return (dispatch) => {
     dispatch(toggleFetchingAC(true))
         usersAPI.getUsers(currentPage,pageSize).then(data => {
@@ -90,9 +90,9 @@ export const unfollowingThunkCreator = (id) => {
         followAPi.userUnfollowing(id).then(response => {
             
 
-            if (response.data.resultCode === 0) {
+            if (response.data.resultCode === 0) { // Когда юзер залогинен (логика из бэк-энда) 
                 dispatch(unfollowAC(id))
-            }if(response.status === 429){
+            }if(response.status === 429){ // Пока что не работает
                 return <p>Произошла ошибка!</p>
             }
 
@@ -119,7 +119,7 @@ export const followingThunkCreator = (id) => {
 export const getCurrentPageThunkCreator = (currentPage,pageSize) => {
     return (dispatch) => {
         dispatch(toggleFetchingAC(true))
-        dispatch(setCurrentPageAC(currentPage))
+        dispatch(setCurrentPageAC(currentPage)) // Берём текущий URL и page,как мы берём есть уже в Users.jsx и в UsersContainer.jsx
         usersAPI.getUsers(currentPage, pageSize).then(data => {
 
             dispatch(toggleFetchingAC(false))

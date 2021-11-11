@@ -33,3 +33,9 @@ export const followAPi = {
         return instance.delete(`follow/${id}`)
     }
 }
+
+export const statusApi = {
+    getUserStatus(id){
+        return instance.get(`/profile/status${id}`)
+    }
+}
