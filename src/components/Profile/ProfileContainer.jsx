@@ -6,6 +6,8 @@ import { getProfileThunk, getStatus, setProfileUsers, updatePhoto, updateStatus}
 import Profile from './Profile'
 
 class ProfileContainer extends React.Component {
+    
+
     componentDidMount(){
         
         
@@ -18,6 +20,14 @@ class ProfileContainer extends React.Component {
         this.props.getStatus(id)
     }
 
+    componentDidUpdate(prevProps){
+        if(prevProps.match.params.id !== this.props.match.params.id){
+            this.props.getProfileThunk(this.props.match.params.id)
+            this.props.getStatus(this.props.match.params.id)
+
+        }
+
+    }
 
 
     render() {
