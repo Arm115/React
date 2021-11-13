@@ -22,6 +22,9 @@ export const profileAPI = {
     },
     getMyProfile(){
         return instance.get('auth/me')
+    },
+    updateImage(photo){
+        return instance.put('/profile/photo', {photo: photo})
     }
 }
 
@@ -36,6 +39,10 @@ export const followAPi = {
 
 export const statusApi = {
     getUserStatus(id){
-        return instance.get(`/profile/status${id}`)
+        return instance.get(`profile/status/${id}`)
+    },
+    updateStatus(status){
+        return instance.put(`profile/status`, { status: status })
     }
 }
+

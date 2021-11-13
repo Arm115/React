@@ -5,8 +5,14 @@ import preloader from './../../../assets/images/Rocket.gif'
 import ProfileStatus from './ProfileStatus'
 
 const ProfileInfo = (props) => {
+    
     if(!props.userProfile){
-        return <div><img src={preloader} className={modules.preloader}/></div>
+        return (
+            <div>
+                <h1>Чтоб посмотреть что здесь есть нужно залогинится</h1>
+                <div><img src={preloader} className={modules.preloader}/></div>
+            </div>
+            )
     }
 
 
@@ -17,7 +23,7 @@ const ProfileInfo = (props) => {
             </div> */}
             <div>
                 <img className={modules.ava_image} src={props.userProfile.photos.large != null ? props.userProfile.photos.large : usersPhotoDefault} /><br/>
-                <ProfileStatus status={"hello my friends"}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                 <p className={modules.spans}>{props.userProfile.fullName}</p>
                 <p className={modules.spans}>{props.userProfile.aboutMe != null ? props.userProfile.aboutMe : 'Я обычный пользователь этой социальной сети'}</p>
             </div>

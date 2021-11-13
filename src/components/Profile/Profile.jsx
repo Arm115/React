@@ -6,10 +6,15 @@ import ProfileInfo from './ProfileInfo/ProfileInfo'
 
 
 const Profile = (props) => {
+    
 
     
     return <div>
-        <ProfileInfo  userProfile={props.userProfile} content_image='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg'/>
+        <ProfileInfo 
+         userProfile={props.userProfile}
+         updateStatus={props.updateStatus}
+         status={props.status}
+         content_image='https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg'/>
         <My_postsContainer />
     </div>
 }

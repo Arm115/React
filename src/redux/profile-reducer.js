@@ -1,9 +1,10 @@
-import { profileAPI } from "../api/api"
+import { profileAPI, statusApi } from "../api/api"
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_CHANGE = 'UPDATE-NEW-POST-CHANGE'
 const SET_PROFILE_USERS = 'SET_PROFILE_USERS'
-
+const SET_STATUS = 'SET_STATUS'
+const SET_PHOTO ='SET_PHOTO'
 
 let initialState = {
     profile: {
@@ -15,7 +16,9 @@ let initialState = {
         ],
         newPostValue: ''
     },
-    userProfile:null
+    userProfile:null,
+    status: "",
+    photo: null
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -42,6 +45,14 @@ const profileReducer = (state = initialState, action) => {
             
             return{...state, userProfile: action.userProfile}
         }
+        case SET_STATUS:{
+            
+            return{...state, status: action.status}
+        }
+        case SET_PHOTO:{
+
+            return {...state, photo: action.photo}
+        }
         default:
             return state
     }
@@ -55,6 +66,17 @@ export const addPostActionCreator = () => ({ type: ADD_POST })
 export const onPostChangeActionCreator = (newText) =>
     ({ type: UPDATE_NEW_POST_CHANGE, newText: newText })
 export const setProfileUsers = (userProfile) => ({type: SET_PROFILE_USERS, userProfile})
+export const setStatus = (status) => ({type: SET_STATUS, status})
+export const setPhoto = (photo) => ({type: SET_PHOTO, photo})
+
+export const updatePhoto = (photo) => {
+    return (dispatch) => {
+        profileAPI.updateImage(photo)
+        .then(response => {
+            dispatch(setPhoto(photo))
+        })
+    }
+}
 
 export const getProfileThunk = (id) => {
     return (dispatch) => {
@@ -64,6 +86,28 @@ export const getProfileThunk = (id) => {
             
             
         })
+    }
+}
+
+export const getStatus = (id) => {
+    return (dispatch) => {
+        statusApi.getUserStatus(id).then(
+            response => {
+                dispatch(setStatus(response.data))
+            }
+        )
+    }
+}
+export const updateStatus = (status) => {
+    return (dispatch) => {
+        statusApi.updateStatus(status).then(
+            response => {
+                if(response.data.resultCode === 0){
+                    dispatch(setStatus(status))
+                }
+                
+            }
+        )
     }
 }
 
