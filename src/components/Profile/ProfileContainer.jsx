@@ -2,16 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { compose } from 'redux'
-import { getProfileThunk, getStatus, setProfileUsers, updatePhoto, updateStatus} from '../../redux/profile-reducer'
+import { getAboutMe, getProfileThunk, getStatus, setProfileUsers, updatePhoto, updateStatus} from '../../redux/profile-reducer'
 import Profile from './Profile'
 
 class ProfileContainer extends React.Component {
-    
-
     componentDidMount(){
         
-        
         let id = this.props.match.params.id
+
 
         if(!id){
             id = 2
@@ -24,6 +22,8 @@ class ProfileContainer extends React.Component {
         if(prevProps.match.params.id !== this.props.match.params.id){
             this.props.getProfileThunk(this.props.match.params.id)
             this.props.getStatus(this.props.match.params.id)
+            // this.props.getProfileThunk(this.props.match.params.id)
+            // this.props.getStatus(this.props.match.params.id)
 
         }
 
@@ -47,7 +47,7 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => ({
     userProfile: state.profile.userProfile,
-    status: state.profile.status
+    status: state.profile.status,
 })
 
 export default compose(

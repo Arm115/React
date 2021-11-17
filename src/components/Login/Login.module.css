@@ -1,0 +1,29 @@
+.login_form input{
+    width: 200px;
+    height: 30px;
+    background-color: rgb(219, 219, 219);
+    border:2px solid;
+    border-color: rgb(14, 153, 14);
+    outline: none;
+}
+.login_form{
+    text-align: center;
+}
+.login_form button {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 10px;
+    background-color: rgb(92, 128, 21);
+    color: rgb(219, 219, 219);
+    outline: none;
+    margin-top: 15px;
+}
+.succsesfully{
+    color: white;
+}
+.reject{
+    color: red;
+}
+.rememberMe input{
+    width: 20px;
+    height: 20px;
+}

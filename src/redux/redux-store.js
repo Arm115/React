@@ -6,13 +6,12 @@ import navbarReducer from "./navbar-reducer";
 import profileReducer from "./profile-reducer";
 import usersReducer from "./users-reducer";
 
-
 let reducers = combineReducers({
     profile: profileReducer,
     dialogs: dialogsReducer,
     navbar: navbarReducer,
     users: usersReducer,
-    auth: authReducer    
+    auth: authReducer,
 
 })
 

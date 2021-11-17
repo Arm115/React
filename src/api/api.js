@@ -46,3 +46,8 @@ export const statusApi = {
     }
 }
 
+// export const aboutMeApi = {
+//     updateAboutMe(aboutMe){
+//         return instance.put(`profile/`, { aboutMe: aboutMe })
+//     }
+// }

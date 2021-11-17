@@ -1,4 +1,3 @@
-import { Redirect } from 'react-router'
 import My_postsContainer from './My_Posts/My_postsContainer'
 import Post from './My_Posts/Post/Post'
 import modules from './Profile.module.css'

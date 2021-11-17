@@ -5,6 +5,7 @@ import preloader from './../../../assets/images/Rocket.gif'
 import ProfileStatus from './ProfileStatus'
 
 const ProfileInfo = (props) => {
+
     
     if(!props.userProfile){
         return (
