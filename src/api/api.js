@@ -45,9 +45,3 @@ export const statusApi = {
         return instance.put(`profile/status`, { status: status })
     }
 }
-
-// export const aboutMeApi = {
-//     updateAboutMe(aboutMe){
-//         return instance.put(`profile/`, { aboutMe: aboutMe })
-//     }
-// }

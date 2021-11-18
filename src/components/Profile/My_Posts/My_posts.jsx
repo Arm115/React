@@ -4,19 +4,44 @@ import React from 'react'
 import { Field, Form } from 'react-final-form'
 
 
+const MyPostsForm = (props) => {
+
+    let onSubmit = (values) => {
+        props.addPost(values.addPostText)
+        values.addPostText = ''
+    }
+
+    let validate = (e) => {
+        
+
+    }
+
+
+    return <Form
+    onSubmit={onSubmit}
+    validate={validate}
+    render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+            <Field name='addPostText' render={({ input, meta }) => (
+                <div>
+                    <div>
+                        <textarea {...input} placeholder='Enter your message'></textarea>
+                        {meta.error && <p>{meta.error}</p>}
+                    </div>
+                    <div><button type='submit'>Send message</button></div>
+                </div>
+
+            )} />
+        </form>
+    )}
+        />
+}
+
 
 const My_posts = (props) => {
 
 
     let postElements = props.postsData.map(post => <Post message={post.message} like={post.likesCount} />)
-
-    let onSubmit = (values) => {
-        props.addPost(values.addPostText)
-    }
-
-    let validate = (e) => {
-
-    }
 
 
 
@@ -25,24 +50,7 @@ const My_posts = (props) => {
         <h3>
             My posts
         </h3>
-        <Form
-            onSubmit={onSubmit}
-            validate={validate}
-            render={({ handleSubmit }) => (
-                <form onSubmit={handleSubmit}>
-                    <Field name='addPostText' render={({ input, meta }) => (
-                        <div>
-                            <div>
-                                <textarea {...input} placeholder='Enter your message'></textarea>
-                                {meta.error && <p>{meta.error}</p>}
-                            </div>
-                            <div><button type='submit'>Send message</button></div>
-                        </div>
-
-                    )} />
-                </form>
-            )}
-                /><br />
+        <MyPostsForm addPost={props.addPost}/><br />
         <div className='posts'>
             {postElements}
         </div>

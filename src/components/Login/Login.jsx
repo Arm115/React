@@ -8,7 +8,7 @@ const LoginForm = (props) => {
     const initialData = {
         login: '',
         password: '',
-        rememberMe: true
+        rememberMe: false
     }
 
 
