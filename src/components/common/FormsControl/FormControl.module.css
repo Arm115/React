@@ -1,0 +1,37 @@
+.login_form_control textarea{
+    width: 180px;
+    height: 40px;
+    background-color: rgb(219, 219, 219);
+    border:2px solid;
+    border-color: rgb(14, 153, 14);
+    outline: none;
+}
+.login_form_control input{
+    width: 200px;
+    height: 30px;
+    background-color: rgb(219, 219, 219);
+    border:2px solid;
+    border-color: rgb(14, 153, 14);
+    outline: none;
+}
+.login_form_control button {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 10px;
+    background-color: rgb(92, 128, 21);
+    color: rgb(219, 219, 219);
+    outline: none;
+    margin-top: 15px;
+}
+
+.reject{
+    color: red;
+}
+.rememberMe input{
+    width: 20px;
+    height: 20px;
+}
+
+.error textarea,
+.error input{
+    border: 1px red solid;
+}

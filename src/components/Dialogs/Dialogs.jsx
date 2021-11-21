@@ -3,10 +3,14 @@ import DialogItem from './DialogItem/DialogItem'
 import Message from './Message/Message'
 import React from 'react'
 import { Field, Form } from 'react-final-form'
+import { required, requiredDisable } from '../../utils/validator'
+import { Element } from '../../hoc/GetElement'
 
 
 
 const AddMessageForm = (props) => {
+
+    const TextArea = Element("textarea")
 
     let onSubmit = (values) => {
         props.onAddMessage(values.newMessageText)
@@ -15,37 +19,28 @@ const AddMessageForm = (props) => {
 
     }
 
-    let validate = (e) => {
+    let validate = (values) => {
         
 
         const errors = {}
 
-        if (e.newMessageText && e.newMessageText.length > 50) {
-            errors.newMessageText = 'Слишком много'
+        errors.newMessageText = required(values.newMessageText)
 
-
-        }
 
         return errors
     }
 
-
+    
 
     return <Form
     onSubmit={onSubmit}
     validate={validate}
     render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
-            <Field name='newMessageText' render={({ input, meta }) => (
-                <div>
-                    <div>
-                        <textarea {...input} placeholder='Enter your message'></textarea>
-                        {meta.error && <p>{meta.error}</p>}
-                    </div>
-                    <div><button type='submit'>Send message</button></div>
-                </div>
-
-            )} />
+            <Field name='newMessageText'
+             component={TextArea}
+             />
+            <button>Send</button>
         </form>
     )}
 />

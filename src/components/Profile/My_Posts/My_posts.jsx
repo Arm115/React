@@ -2,36 +2,39 @@ import other_items from './My_posts.module.css'
 import Post from './Post/Post'
 import React from 'react'
 import { Field, Form } from 'react-final-form'
+import { required } from '../../../utils/validator'
+import { Element } from '../../../hoc/GetElement'
 
 
 const MyPostsForm = (props) => {
+
+    const TextArea = Element("textarea")
 
     let onSubmit = (values) => {
         props.addPost(values.addPostText)
         values.addPostText = ''
     }
 
-    let validate = (e) => {
-        
+    let validate = (values) => {
+        const error = {}
 
+        error.addPostText = required(values.addPostText)
+
+        return error
     }
 
+    
 
     return <Form
     onSubmit={onSubmit}
     validate={validate}
     render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
-            <Field name='addPostText' render={({ input, meta }) => (
-                <div>
-                    <div>
-                        <textarea {...input} placeholder='Enter your message'></textarea>
-                        {meta.error && <p>{meta.error}</p>}
-                    </div>
-                    <div><button type='submit'>Send message</button></div>
-                </div>
-
-            )} />
+            <Field
+            name='addPostText'
+            component={TextArea}
+            />
+            <button >Send</button>
         </form>
     )}
         />
