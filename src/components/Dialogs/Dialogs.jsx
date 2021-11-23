@@ -39,6 +39,7 @@ const AddMessageForm = (props) => {
         <form onSubmit={handleSubmit}>
             <Field name='newMessageText'
              component={TextArea}
+             placeholder='Add message'
              />
             <button>Send</button>
         </form>

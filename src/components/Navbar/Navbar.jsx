@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 import classes from './Navbar.module.css'
 import NavbarLinks from './NavbarLinks/NavbarLinks'
 import FriendsList from './FriendsList/FriendList'
+import { Container, Nav, NavDropdown, Offcanvas } from 'react-bootstrap'
 
 
 

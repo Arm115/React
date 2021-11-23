@@ -45,3 +45,11 @@ export const statusApi = {
         return instance.put(`profile/status`, { status: status })
     }
 }
+export const loginAPI = {
+    login(email,password,rememberMe){
+        return instance.post('auth/login', {email,password,rememberMe })
+    },
+    logout(){
+        return instance.delete('auth/login')
+    }
+}

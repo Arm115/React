@@ -1,5 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
+import { withRouter } from "react-router";
 import { compose } from "redux";
 import { withAuthRedirect } from "../../hoc/AuthRedirect";
 import { followAC, followingThunkCreator, getCurrentPageThunkCreator, getUsers, setCurrentPageAC, setUsersAC, toggleFetchingAC, toggleFollowingInProgressAC, unfollowAC, unfollowingThunkCreator } from "../../redux/users-reducer"
@@ -9,7 +10,7 @@ import Users from "./Users";
 
 class UsersAPIContainer extends React.Component {
     componentDidMount() {
-        this.props.getUsers()
+        this.props.getUsers(this.props.currentPage,this.props.pageSize)
     }
 
 
@@ -27,7 +28,7 @@ class UsersAPIContainer extends React.Component {
 
 
     onPageChanged = (currentPage) => {
-        this.props.getCurrentPage(currentPage)
+        this.props.getCurrentPage(currentPage,this.props.pageSize)
     }
 
 
@@ -107,5 +108,4 @@ let mapDispatchToProps = (dispatch) => {
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    // withAuthRedirect
 )(UsersAPIContainer)

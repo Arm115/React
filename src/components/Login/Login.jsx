@@ -1,41 +1,49 @@
 import { Field, Form } from 'react-final-form'
 import { Element } from '../../hoc/GetElement'
-import {minLength,required} from '../../utils/validator'
+import { minLength, required } from '../../utils/validator'
 import modules from './Login.module.css'
+import { Redirect } from "react-router";
 
 
 
 
+export const LoginForm = (props) => {
 
-const LoginForm = (props) => {
 
-    
+
     const Input = Element("input")
 
     let minLength8 = minLength(8)
 
 
     const initialData = {
-        login: '',
+        email: '',
         password: '',
         rememberMe: false
     }
 
 
-    const onSubmit = (e) => {
 
-        e.login = ''
-        e.password = ''
+
+
+    const onSubmit = (values) => {
+        props.login(values.email, values.password, values.rememberMe)
+
+
+
+
+
+
     }
 
     const validate = (values) => {
         const error = {}
 
-        
 
-        error.login = required(values.login)
-        if(values.login && values.login.length > 16){
-            error.login = 'Максимальное количество символов 16'
+
+        error.email = required(values.email)
+        if (values.email && values.email.length > 20) {
+            error.email = 'Максимальное количество символов 20'
         }
 
         error.password = required(values.password)
@@ -43,53 +51,64 @@ const LoginForm = (props) => {
         return error
     }
 
-    
 
-    return <Form
-        onSubmit={onSubmit}
-        validate={validate}
-        initialValues={initialData}
-        render={({ handleSubmit }) => (
-            <form className={modules.login_form} onSubmit={handleSubmit}>
-                <div>
-                    <div>
-                        <label>Login</label><br />
-                        <Field
-                            name='login'
-                            validate={minLength8}
-                            component={Input}
-                            placeholder='Login'
-                        /></div>
-                    <label>Password</label><br />
-                    <div>
-                        <Field
-                            name='password'
-                            render={Input}
-                            type='password'
-                            placeholder='Password'
-                        /></div>
-                    <div className={modules.rememberMe}>
-                        <Field name='rememberMe' component='input' type='checkbox' />
-                        Remember Me
 
-                    </div>
-                </div>
-                <button type='submit'>Submit</button>
-            </form>
-        )}
-    />
+    return (
+
+        <div>
+
+            <div>
+                <h3>You can register <a href='https://social-network.samuraijs.com/' target='_blank'>Here</a></h3>
+            </div>
+
+            <Form
+                onSubmit={onSubmit}
+                validate={validate}
+                initialValues={initialData}
+                render={({ handleSubmit }) => (
+                    <form className={modules.login_form} onSubmit={handleSubmit}>
+                        <div>
+                            <div>
+                                <label>Login</label><br />
+                                <Field
+                                    name='email'
+                                    validate={minLength8}
+                                    component={Input}
+                                    placeholder='Login'
+                                /></div>
+                            <label>Password</label><br />
+                            <div>
+                                <Field
+                                    name='password'
+                                    render={Input}
+                                    type='password'
+                                    placeholder='Password'
+                                /></div>
+                            <div className={modules.rememberMe}>
+                                <Field name='rememberMe' component='input' type='checkbox' />
+                                Remember Me
+
+                            </div>
+                        </div>
+                        <button type='submit'>Submit</button>
+                    </form>
+                )}
+            />
+        </div>
+    )
 }
 
 const Login = (props) => {
+    
 
 
 
     return (
         <div>
             {props.isAuth ?
-                <h1>You are succsefully logined</h1>
+                <Redirect to={'/profile/' + props.id} />
                 :
-                <LoginForm />
+                <LoginForm {...props} login={props.login} />
 
             }
         </div>

@@ -1,9 +1,6 @@
-import axios from 'axios'
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
-import { profileAPI } from '../../api/api'
-import { authThunk, setUserData } from '../../redux/auth-reducer'
+import { authThunk, logout, setUserData } from '../../redux/auth-reducer'
 import Header from './Header'
 import modules from './Header.module.css'
 
@@ -16,8 +13,9 @@ class HeaderContainerComponent extends React.Component{
         this.props.authThunk()
     }
 
+
     render(){
-        return <Header {...this.props}/>
+        return <Header {...this.props} userLogout={this.props.logout}/>
     }
 }
 
@@ -28,6 +26,6 @@ let mstp = (state) => ({
 
 
 
-const HeaderContainer = connect(mstp,{setUserData,authThunk})(HeaderContainerComponent)
+const HeaderContainer = connect(mstp,{setUserData,authThunk,logout})(HeaderContainerComponent)
 
 export default HeaderContainer

@@ -33,6 +33,7 @@ const MyPostsForm = (props) => {
             <Field
             name='addPostText'
             component={TextArea}
+            placeholder='Add post'
             />
             <button >Send</button>
         </form>
