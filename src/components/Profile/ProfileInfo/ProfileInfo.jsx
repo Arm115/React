@@ -1,7 +1,6 @@
 import modules from './ProfileInfo.module.css'
 import usersPhotoDefault from './../../../assets/images/usersDefaultPhoto.jpg'
 import Preloader from './../../common/Preloader/Preloader'
-import preloader from './../../../assets/images/Rocket.gif'
 import ProfileStatus from './ProfileStatus'
 
 const ProfileInfo = (props) => {
@@ -10,8 +9,7 @@ const ProfileInfo = (props) => {
     if(!props.userProfile){
         return (
             <div>
-                <h1>Чтоб посмотреть что здесь есть нужно залогинится</h1>
-                <div><img src={preloader} className={modules.preloader}/></div>
+                <Preloader />
             </div>
             )
     }

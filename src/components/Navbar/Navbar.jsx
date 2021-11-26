@@ -19,7 +19,7 @@ const Navbar = (props) => {
                 <NavbarLinks link='news' message='News' />
                 <NavbarLinks link='music' message='Music' />
                 <NavbarLinks link='settings' message='Settings' />
-                <NavbarLinks link='users' message='Find Users' />
+                <NavbarLinks link={'users/' + props.currentPage} message='Find Users' />
             </nav>
             <div className={classes.friendsList}>
                 <h1>

@@ -1,9 +1,7 @@
-import axios from "axios"
 import React from "react"
 import { connect } from "react-redux"
 import { withRouter } from "react-router"
-import { getMyProfile, profileAPI } from "../../api/api"
-import { getMyProfileThunk, getUserId } from "../../redux/navbar-reducer"
+import { getMyProfileThunk } from "../../redux/navbar-reducer"
 import Navbar from "./Navbar"
 
 
@@ -14,14 +12,15 @@ class NavbarContainer extends React.Component{
     }
 
     render(){
-        return <Navbar {...this.props} id={this.props.id}/>
+        return <Navbar {...this.props} id={this.props.id} currentPage={this.props.currentPage}/>
     }
 }
 
 
 let mapStateToProps = (state) => ({
     friends: state.navbar.navbar.friends,
-    id: state.navbar.id
+    id: state.navbar.id,
+    currentPage: state.users.currentPage
 })
 
 
@@ -29,4 +28,4 @@ let mapStateToProps = (state) => ({
 
 let NavbarContainerUrl = withRouter(NavbarContainer)
 
-export default connect(mapStateToProps,{getUserId, getMyProfileThunk})(NavbarContainerUrl)
+export default connect(mapStateToProps,{getMyProfileThunk})(NavbarContainerUrl)

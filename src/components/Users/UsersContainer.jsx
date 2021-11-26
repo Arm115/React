@@ -4,6 +4,7 @@ import { withRouter } from "react-router";
 import { compose } from "redux";
 import { withAuthRedirect } from "../../hoc/AuthRedirect";
 import { followAC, followingThunkCreator, getCurrentPageThunkCreator, getUsers, setCurrentPageAC, setUsersAC, toggleFetchingAC, toggleFollowingInProgressAC, unfollowAC, unfollowingThunkCreator } from "../../redux/users-reducer"
+import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getTotalUserCount, getUsersSelector } from "../../redux/selectors/users-selectors";
 import Users from "./Users";
 
 
@@ -30,10 +31,15 @@ class UsersAPIContainer extends React.Component {
     onPageChanged = (currentPage) => {
         this.props.getCurrentPage(currentPage,this.props.pageSize)
     }
+    componentDidUpdate(prevProps,prevState){
+        if(prevProps.currentPage !== this.props.match.params.currentPage){
+            this.props.getCurrentPage(this.props.match.params.currentPage, this.props.pageSize)
+        }
+    }
 
 
     render() {
-
+        
         return <Users
             pageSize={this.props.pageSize}
             totalUsersCount={this.props.totalUsersCount}
@@ -58,14 +64,15 @@ class UsersAPIContainer extends React.Component {
 let mapStateToProps = (state) => {
 
     return {
-        users: state.users.users,
-        pageSize: state.users.pageSize,
-        totalUsersCount: state.users.totalUsersCount,
-        currentPage: state.users.currentPage,
-        isFetching: state.users.isFetching,
-        followingInProgress: state.users.followingInProgress
+        users: getUsersSelector(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUserCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
+
 
 
 let mapDispatchToProps = (dispatch) => {
@@ -108,4 +115,5 @@ let mapDispatchToProps = (dispatch) => {
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
+    withRouter
 )(UsersAPIContainer)

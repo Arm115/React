@@ -25,3 +25,6 @@ a:hover{
 .pages_span a{
     display: flex;
 }
+.active_page{
+    color:black;
+}

@@ -14,9 +14,6 @@ const AddMessageForm = (props) => {
 
     let onSubmit = (values) => {
         props.onAddMessage(values.newMessageText)
-        values.newMessageText = ''
-
-
     }
 
     let validate = (values) => {

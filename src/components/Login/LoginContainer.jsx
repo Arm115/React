@@ -1,7 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { getResaultCode, login } from "../../redux/auth-reducer"
-import Login, { LoginForm } from "./Login"
+import Login from "./Login"
 
 
 class LoginContainer extends React.Component{
@@ -18,7 +18,8 @@ class LoginContainer extends React.Component{
 let mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth,
     login: state.auth.login,
-    password: state.auth.password,
+    error: state.auth.error,
+    email: state.auth.email,
     rememberMe: state.auth.rememberMe,
     id: state.auth.id
 })

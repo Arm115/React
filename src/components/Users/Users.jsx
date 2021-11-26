@@ -2,11 +2,13 @@ import modules from './Users.module.css'
 import usersPhotoDefault from './../../assets/images/usersDefaultPhoto.jpg'
 import { NavLink } from "react-router-dom";
 import preloader from './../../assets/images/Rocket.gif'
+import Preloader from '../common/Preloader/Preloader';
 
 
 
 
 let Users = (props) => {
+    
     
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
 
@@ -21,7 +23,7 @@ let Users = (props) => {
     return (
         <div>
             {pages.map(p => {
-                return <NavLink to={props.currentPage} className={props.currentPage === p && modules.pages} onClick={(e) => props.onPageChanged(p)}>{p}</NavLink>
+                return <NavLink to={"/users/" + p} className={props.currentPage === p && modules.pages} activeClassName={modules.active_page} onClick={(e) => props.onPageChanged(p)}>{p}</NavLink>
             })}
             <div>
                 {
@@ -59,14 +61,10 @@ let Users = (props) => {
                                 <div><NavLink to={'profile/' + u.id} activeClassName={modules.active}>{u.name}</NavLink></div>
                                 <div>{u.status != null ? u.status : "Нет статуса"}</div>
                             </span>
-                            <span>
-                                {/* <div>{u.location.country}</div>
-                <div>{u.location.city}</div> */}
-                            </span>
                         </span>
                     </div>)}
             </div>
-            <div>{props.isFetching ? <img src={preloader} className={modules.preloader} /> : null}</div>
+            <div>{props.isFetching ? <Preloader /> : null}</div>
         </div>
     )
 }

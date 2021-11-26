@@ -53,3 +53,4 @@ export const loginAPI = {
         return instance.delete('auth/login')
     }
 }
+
