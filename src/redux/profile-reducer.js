@@ -10,10 +10,7 @@ const UPDATE_ABOUT_ME = 'UPDATE_ABOUT_ME'
 let initialState = {
     profile: {
         postsData: [
-            { id: 1, message: 'Hi,how are you', likesCount: 78 },
-            { id: 2, message: 'My post', likesCount: 20 },
-            { id: 3, message: '', likesCount: 0 },
-            { id: 4, message: 'This is test of mapping', likesCount: 5 },
+            { id: 1, message: 'Hi,how are you', likesCount: 78 }
         ],
         
     },

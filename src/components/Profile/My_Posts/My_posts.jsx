@@ -1,4 +1,4 @@
-import other_items from './My_posts.module.css'
+import styles from './My_posts.module.css'
 import Post from './Post/Post'
 import React from 'react'
 import { Field, Form } from 'react-final-form'
@@ -23,22 +23,22 @@ const MyPostsForm = (props) => {
         return error
     }
 
-    
+
 
     return <Form
-    onSubmit={onSubmit}
-    validate={validate}
-    render={({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-            <Field
-            name='addPostText'
-            component={TextArea}
-            placeholder='Add post'
-            />
-            <button >Send</button>
-        </form>
-    )}
-        />
+        onSubmit={onSubmit}
+        validate={validate}
+        render={({ handleSubmit }) => (
+            <form onSubmit={handleSubmit}>
+                <Field
+                    name='addPostText'
+                    component={TextArea}
+                    placeholder='Add post'
+                />
+                <button type='submit'>Send</button>
+            </form>
+        )}
+    />
 }
 
 
@@ -50,15 +50,17 @@ const My_posts = (props) => {
 
 
 
-    return <div className={other_items.PostsBlock}>
-        <h3>
-            My posts
-        </h3>
-        <MyPostsForm addPost={props.addPost}/><br />
-        <div className='posts'>
-            {postElements}
+    return (
+        <div className={styles.PostsBlock}>
+            <h3>
+                My posts
+            </h3>
+            <MyPostsForm addPost={props.addPost} /><br />
+            <div className={styles.posts}>
+                {postElements}
+            </div>
         </div>
-    </div>
+        )
 
 }
 

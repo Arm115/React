@@ -1,20 +1,9 @@
-.login_form{
-    text-align: center;
-}
-
-.rememberMe input{
-    width: 20px;
-    height: 20px;
-}
-
-.email_error input{
-    border: 1px red solid;
-}
 .sendButton {
     border: 2px #198754 solid;
     color: #198754;
     cursor: pointer;
     background-color: #00874800;
+    border-radius: 5px;
 }
 
 .sendButton:hover{

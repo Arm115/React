@@ -7,10 +7,33 @@
     height: 120px;
     padding: 5px;
     margin-left: 15px;
+    transition: width 2s, height 2s;
+}
+.ava_image:hover{
+    width: 140px;
+    height: 140px;
+    opacity: 0.8;
 }
 .preloader{
     margin-left: 500px;
 }
 .spans{
     margin-left: 15px;
+}
+.profile_content{
+    animation: profile-animation 2s forwards;
+}
+
+@keyframes profile-animation{
+    0%{
+        transform: translateY(-60px);
+        opacity: 0.6;
+    }
+    50%{
+        opacity: 0.8;
+    }
+    100%{
+        transform: translateY(0px);
+        opacity: 1;
+    }
 }

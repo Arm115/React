@@ -1,7 +1,24 @@
 .PostsBlock{
     padding: 10px;
     margin-left: 10px;
+    animation: posts-animation 2s forwards;
 }
 .posts{
     margin-top: 10px;
+}
+
+
+
+@keyframes posts-animation{
+    0%{
+        transform: translateY(180px);
+        opacity: 0.6;
+    }
+    50%{
+        opacity: 0.8;
+    }
+    100%{
+        transform: translateY(0px);
+        opacity: 1;
+    }
 }

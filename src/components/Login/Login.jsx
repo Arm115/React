@@ -3,12 +3,14 @@ import { Element } from '../../hoc/GetElement'
 import {minLength, required } from '../../utils/validator'
 import modules from './Login.module.css'
 import { Redirect } from "react-router";
+import Button from './../common/Button/Button'
+import { OnChange } from 'react-final-form-listeners'
 
 
 
 
 export const LoginForm = (props) => {
-    const Input = Element("input")
+    
 
     let minLength8 = minLength(8)
 
@@ -51,12 +53,17 @@ export const LoginForm = (props) => {
         return error
     }
 
+
+   
+
+    const Input = Element("input")
     
 
 
 
     return (
-
+        
+        
         <div>
 
             <div>
@@ -77,7 +84,16 @@ export const LoginForm = (props) => {
                                     validate={minLength8}
                                     component={Input}
                                     placeholder='Login'
-                                /></div>
+                                    
+                                />
+                                <OnChange name='email'>
+                                    {() => {
+                                        props.errorFunc(true)
+                                    }}
+
+                                </OnChange>
+                                
+                                </div>
                             <label>Password</label><br />
                             <div >
                                 <Field
@@ -85,14 +101,21 @@ export const LoginForm = (props) => {
                                     render={Input}
                                     type='password'
                                     placeholder='Password'
-                                /></div>
+                                />
+                                <OnChange name='password'>
+                                    {() => {
+                                        props.errorFunc(true)
+                                    }}
+
+                                </OnChange>
+                                </div>
                             <div className={modules.rememberMe}>
                                 <Field name='rememberMe' component='input' type='checkbox' />
                                 Remember Me
-
                             </div>
+                            <Button type='submit'>Login</Button>
                         </div>
-                        <button type='submit' >Submit</button>
+                        
                     </form>
                 )}
             />
@@ -101,17 +124,12 @@ export const LoginForm = (props) => {
 }
 
 const Login = (props) => {
-    
-    
-
-
-
     return (
         <div>
             {props.isAuth ?
                 <Redirect to={'/profile/' + props.id} />
                 :
-                <LoginForm {...props} login={props.login} />
+                <LoginForm {...props} login={props.login} newValue={props.newValue} errorFunc={props.errorFunc}/>
 
             }
         </div>

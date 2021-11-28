@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import classes from './Header.module.css'
-
+import Button from './../common/Button/Button'
 
 const Header = (props) => {
 
@@ -14,7 +14,7 @@ const Header = (props) => {
         ?
         <div>
           <span className={classes.user_login}>{props.login}</span><br />
-          <button type='submit' onClick={props.logout}>Logout</button>
+          <Button onClick={props.logout} >Logout</Button>
         </div>
         :
         <NavLink to={'/login/'}>Login</NavLink>

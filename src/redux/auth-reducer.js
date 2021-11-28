@@ -11,7 +11,7 @@ let initialState = {
     login: null,
     password: null,
     isAuth: false,
-    error: true
+    error: true,
     
 
 }

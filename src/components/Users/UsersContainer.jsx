@@ -9,7 +9,7 @@ import Users from "./Users";
 
 
 
-class UsersAPIContainer extends React.Component {
+class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage,this.props.pageSize)
     }
@@ -116,4 +116,4 @@ let mapDispatchToProps = (dispatch) => {
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     withRouter
-)(UsersAPIContainer)
+)(UsersContainer)
